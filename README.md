@@ -1,69 +1,101 @@
-# L2 Preposition Modeling (Anonymous)
 
-This repository contains code, data, and results for experiments on second language (L2) preposition modeling.
+# Modeling L2 English Learning by Chinese L1 Speakers (Anonymous Submission)
 
 ## Overview
+This repository contains code, data, and results for modeling second language (L2) learning behavior using language models.
 
-The goal of this project is to evaluate how different language models predict English prepositions in context, and to analyze whether model behavior aligns with human learner patterns.
-
-The experiments focus on:
-- Masked preposition prediction
-- Human-like error analysis
-- Perplexity evaluation on learner corpora
+We study how models simulate Mandarin (L1) → English (L2) learning, focusing on:
+- Preposition prediction
+- Human-like error patterns
+- Perplexity on learner essays
 
 ---
 
 ## Repository Structure
 
-notebooks/              # Evaluation and analysis notebooks
 data/
-  evaluation_sets/      # Cleaned learner corpora and evaluation data
+  evaluation_sets/
+  exp_10M_sets/
+  model_30M_corpus/
+
+models/
+  MUSE_artifacts/
+
+notebooks/
+
 results/
-  model_outputs/        # Model prediction outputs (normalized)
+  model_outputs/
 
 ---
 
-## Data
+## Key Experiments
 
-The evaluation data includes learner corpora from multiple L1 backgrounds:
-Chinese, Japanese, Korean, Thai, Filipino, Urdu, and native English.
+### Preposition Prediction
+- Masked preposition task
+- Model selects from 4 candidates
+- Evaluated using accuracy
 
----
+### Human-like Error Analysis
+- Focus only on cases where humans chose the wrong answer
+- Check if model selects the SAME wrong preposition
+- Measures alignment with human mistakes
 
-## Model Outputs
-
-The results/model_outputs/ folder contains normalized probability outputs for multiple models including:
-Base BERT, BERT variants (CSEE, LoRA, MUSE), and BabyRoBERTa models with different training settings.
-
----
-
-## Experiments
-
-1. Preposition Prediction
-Models predict masked prepositions in sentences.
-
-2. Human-like Error Analysis
-We evaluate whether models select the same incorrect prepositions as human learners.
-
-3. Perplexity Evaluation
-Pseudo-perplexity is computed on learner corpora. Sentence segmentation fixes were tested and did not affect results.
+### Perplexity Evaluation
+- Computed on ICNALE essays (EN, ZH, JA, TH, FIL)
+- Verified robustness after sentence segmentation fix
 
 ---
 
-## Notes
+## Important Fix
+Some datasets (Japanese, Thai, Filipino) had incorrect sentence splitting.
 
-- Notebooks are cleaned (no outputs, no personal paths)
-- Paths are relative to repository
-- Model weights are not included
+Fix:
+- Replace newline with sentence boundaries
+- Recompute sentences
+
+Result:
+- No change in perplexity → evaluation is stable
+
+---
+
+## Models
+
+- BERT_base
+- BERT_L2A (essay finetuned)
+- BERT_LoRA
+- BERT_MUSE
+- BERT_LoRA_MUSE
+- BabyRoBERTa (30M W2W)
+- BabyRoBERTa (30M Mix)
+- Multiple seed variations
+
+---
+
+## Results Summary
+
+- BERT models: high accuracy, low human-error alignment
+- MUSE: more errors but limited alignment
+- BabyRoBERTa: best alignment with human mistakes
 
 ---
 
 ## Reproducibility
 
-Use the data and notebooks provided to reproduce results.
+1. Use results from:
+   results/model_outputs/
+
+2. Run notebooks:
+   notebooks/
+
+Metrics:
+- Accuracy
+- Human-like error accuracy
+- Pseudo-perplexity
 
 ---
 
-## Disclaimer
+## Notes
 
-This repository is anonymized for review purposes.
+- Fully anonymized repository
+- No personal identifiers
+- For research use only
