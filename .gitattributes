@@ -1,0 +1,2 @@
+data/training_data/final_english_training_corpus_gpt41mini_repaired.txt filter=lfs diff=lfs merge=lfs -text
+data/training_data/babylm_english_matched_108M_words.txt filter=lfs diff=lfs merge=lfs -text
