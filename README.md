@@ -1,101 +1,54 @@
-
-# Modeling L2 English Learning by Chinese L1 Speakers (Anonymous Submission)
+# Modeling Second Language Learning Through a Behavioral Lens
 
 ## Overview
-This repository contains code, data, and results for modeling second language (L2) learning behavior using language models.
+This repository contains code, training data, evaluation data, and results for an anonymous paper submission on modeling Mandarin Chinese (L1) to English (L2) learning using BabyRoBERTa-based models.
 
-We study how models simulate Mandarin (L1) → English (L2) learning, focusing on:
-- Preposition prediction
-- Human-like error patterns
-- Perplexity on learner essays
+The final study compares six models:
 
----
+- Baby_EN
+- Baby_L2E
+- Baby_MUSE
+- Baby_W2W-ZH
+- Baby_W2W-Mix
+- Baby_EN-ZH
 
-## Repository Structure
+The models are evaluated using:
 
-data/
-  evaluation_sets/
-  exp_10M_sets/
-  model_30M_corpus/
+- Essay pseudo-perplexity
+- Preposition selection based on Mandarin L1 learner behavior
+- BLiMP grammatical competence evaluation
 
-models/
-  MUSE_artifacts/
+## Main Notebooks
 
-notebooks/
+- `chinese_translation_final_1.ipynb` — Mandarin-to-English word-to-word translation pipeline
+- `model_training_evaluation.ipynb` — model training and evaluation workflow
 
-results/
-  model_outputs/
+## Data
 
----
+Training data is available in:
 
-## Key Experiments
+`data/training_data/`
 
-### Preposition Prediction
-- Masked preposition task
-- Model selects from 4 candidates
-- Evaluated using accuracy
+Evaluation data is available in:
 
-### Human-like Error Analysis
-- Focus only on cases where humans chose the wrong answer
-- Check if model selects the SAME wrong preposition
-- Measures alignment with human mistakes
+`data/evaluation_sets/`
 
-### Perplexity Evaluation
-- Computed on ICNALE essays (EN, ZH, JA, TH, FIL)
-- Verified robustness after sentence segmentation fix
+Large training corpora are stored using Git LFS.
 
----
+## Final Results
 
-## Important Fix
-Some datasets (Japanese, Thai, Filipino) had incorrect sentence splitting.
+Final paper results are available in:
 
-Fix:
-- Replace newline with sentence boundaries
-- Recompute sentences
+`results/final_results/`
 
-Result:
-- No change in perplexity → evaluation is stable
+This includes:
 
----
+- BLiMP detailed results
+- BLiMP summary
+- preposition evaluation results
+- pseudo-perplexity results
 
-## Models
+## Anonymous Submission
 
-- BERT_base
-- BERT_L2A (essay finetuned)
-- BERT_LoRA
-- BERT_MUSE
-- BERT_LoRA_MUSE
-- BabyRoBERTa (30M W2W)
-- BabyRoBERTa (30M Mix)
-- Multiple seed variations
-
----
-
-## Results Summary
-
-- BERT models: high accuracy, low human-error alignment
-- MUSE: more errors but limited alignment
-- BabyRoBERTa: best alignment with human mistakes
-
----
-
-## Reproducibility
-
-1. Use results from:
-   results/model_outputs/
-
-2. Run notebooks:
-   notebooks/
-
-Metrics:
-- Accuracy
-- Human-like error accuracy
-- Pseudo-perplexity
-
----
-
-## Notes
-
-- Fully anonymized repository
-- No personal identifiers
-- For research use only
+This repository is provided as supplementary material for anonymous peer review.
+Author-identifying information has intentionally been omitted.
